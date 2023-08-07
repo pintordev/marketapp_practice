@@ -1,4 +1,4 @@
-package com.pintor.marketapp.Home;
+package com.pintor.marketapp.home;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
