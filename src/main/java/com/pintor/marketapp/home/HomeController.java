@@ -13,8 +13,7 @@ public class HomeController {
     }
 
     @GetMapping("/index")
-    @ResponseBody
     public String index() {
-        return "홈화면입니다.";
+        return "index";
     }
 }
