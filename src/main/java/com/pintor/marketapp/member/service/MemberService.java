@@ -15,14 +15,14 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public Member create(String username, String password, String email, String nickname) {
+    public Member create(String username, String password, String nickname, String email) {
 
         Member member = new Member();
 
         member.setUsername(username);
         member.setPassword(this.passwordEncoder.encode(password));
-        member.setEmail(email);
         member.setNickname(nickname);
+        member.setEmail(email);
         member.setCreateDate(LocalDateTime.now());
 
         this.memberRepository.save(member);

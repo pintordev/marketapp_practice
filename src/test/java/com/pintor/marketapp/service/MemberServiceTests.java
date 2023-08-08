@@ -20,9 +20,9 @@ public class MemberServiceTests {
 //
 //        String username = "user1";
 //        String password = "1234";
-//        String email = "test@test.dev";
 //        String nickname = "tester1";
+//        String email = "test@test.dev";
 //
-//        this.memberService.create(username, password, email, nickname);
+//        this.memberService.create(username, password, nickname, email);
 //    }
 }
