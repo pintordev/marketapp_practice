@@ -14,7 +14,7 @@ public class ProductServiceTests {
 
 //    @Test
 //    @DisplayName("강의 제품 생성")
-//    void createProductTest() {
+//    public void createProductTest() {
 //
 //        for (int i = 2; i <= 200; i++) {
 //
