@@ -5,7 +5,7 @@
         <h1 class="t-text-[1.5rem] t-font-bold">강의리스트</h1>
         <ul class="t-grid t-grid-cols-1 sm:t-grid-cols-2 md:t-grid-cols-3 lg:sm:t-grid-cols-4 t-gap-[20px] t-mt-3">
             <li  th:each="product, loop  : ${productList}" class="t-flex t-flex-col">
-                <a data-before="VIEW MORE" href="#"
+                <a data-before="VIEW MORE" th:href="@{|/product/${product.id}|}"
                    class="">
                     <img class="t-block t-w-full" src="https://i.imgur.com/PVsCFy1.png" alt="">
                 </a>
