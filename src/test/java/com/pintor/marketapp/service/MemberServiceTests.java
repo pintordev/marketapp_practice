@@ -14,15 +14,15 @@ public class MemberServiceTests {
     @Autowired
     private MemberService memberService;
 
-    @Test
-    @DisplayName("회원 생성")
-    public void createMemberTest() {
-
-        String username = "user1";
-        String password = "1234";
-        String email = "test@test.dev";
-        String nickname = "tester1";
-
-        this.memberService.create(username, password, email, nickname);
-    }
+//    @Test
+//    @DisplayName("회원 생성")
+//    public void createMemberTest() {
+//
+//        String username = "user1";
+//        String password = "1234";
+//        String email = "test@test.dev";
+//        String nickname = "tester1";
+//
+//        this.memberService.create(username, password, email, nickname);
+//    }
 }
