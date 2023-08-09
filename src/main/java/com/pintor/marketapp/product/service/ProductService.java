@@ -36,11 +36,7 @@ public class ProductService {
 
     public Product getProduct(Long id) {
 
-        Optional<Product> _product = this.productRepository.findById(id);
-        if (_product.isPresent()) {
-            return _product.get();
-        } else {
-            throw new DataNotFoundException("product not found");
-        }
+        return this.productRepository.findById(id)
+                .orElseThrow(() -> new DataNotFoundException("product not found"));
     }
 }
