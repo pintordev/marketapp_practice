@@ -1,21 +1,20 @@
 package com.pintor.marketapp.member.entity;
 
-import jakarta.persistence.*;
+import com.pintor.marketapp.base.entity.BaseEntity;
+import com.pintor.marketapp.question.entity.Question;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
-public class Member {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Member extends BaseEntity {
 
     @Column(unique = true)
     private String username;
@@ -26,9 +25,8 @@ public class Member {
 
     private String email;
 
-    @CreatedDate
-    private LocalDateTime createDate;
+    private String isActive;
 
-    @LastModifiedDate
-    private LocalDateTime modifyDate;
+    @OneToMany(mappedBy = "questioner", cascade = CascadeType.REMOVE)
+    private List<Question> questionList;
 }

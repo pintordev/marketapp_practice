@@ -1,30 +1,31 @@
 package com.pintor.marketapp.market.entity;
 
+import com.pintor.marketapp.base.entity.BaseEntity;
+import com.pintor.marketapp.member.entity.Member;
+import com.pintor.marketapp.product.entity.Product;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
-public class Market {
+public class Market extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String name;
 
+    private String info;
 
+    private String email;
 
-    @CreatedDate
-    private LocalDateTime createDate;
+    @OneToOne
+    private Member owner;
 
-    @LastModifiedDate
-    private LocalDateTime modifyDate;
+    @OneToMany(mappedBy = "market", cascade = CascadeType.REMOVE)
+    private List<Product> productList;
 }

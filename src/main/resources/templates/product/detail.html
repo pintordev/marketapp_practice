@@ -12,19 +12,21 @@
                     <img class="t-w-full t-max-w-[300px]" src="https://i.imgur.com/PVsCFy1.png" alt="상품이미지">
                 </li>
                 <li class="list-group-item">
-                    번호 : <span class="badge bg-primary">123</span>
+                    번호 : <span class="badge bg-primary" th:text="${product.id}"></span>
                 </li>
                 <li class="list-group-item">
-                    등록날짜 : <span class="badge bg-secondary">2023-03-11</span>
+                    등록날짜 : <span class="badge bg-secondary"
+                                 th:text="${#temporals.format(product.createDate, 'yy-MM-dd HH:mm')}"></span>
                 </li>
                 <li class="list-group-item">
-                    수정날짜 : <span class="badge bg-secondary">2023-03-11</span>
+                    수정날짜 : <span class="badge bg-secondary" th:if="${product.modifyDate != null}"
+                                 th:text="${#temporals.format(product.modifyDate, 'yy-MM-dd HH:mm')}"></span>
                 </li>
                 <li class="list-group-item">
-                    상품명 : <span class="t-font-bold">띵강의</span>
+                    상품명 : <span class="t-font-bold" th:text="${product.name}"></span>
                 </li>
                 <li class="list-group-item">
-                    가격 : <span class="t-font-bold">1</span>원
+                    가격 : <span class="t-font-bold" th:text="${product.price}"></span>원
                 </li>
                 <li class="list-group-item">
                     마켓 : <span class="badge bg-primary">22</span>
