@@ -3,9 +3,6 @@ package com.pintor.marketapp.security;
 import com.pintor.marketapp.member.entity.Member;
 import com.pintor.marketapp.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,9 +12,7 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @Service
@@ -31,15 +26,30 @@ public class CustomSecurityService extends DefaultOAuth2UserService implements U
         Member member = this.memberRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("username not found"));
 
-        List<GrantedAuthority> authorityList = new ArrayList<>();
-        authorityList.add(new SimpleGrantedAuthority("member"));
-
-        return new User(member.getUsername(), member.getPassword(), authorityList);
+        return new CustomDetails(member);
     }
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
 
-        return null;
+        OAuth2User oAuth2User = super.loadUser(userRequest);
+        Map<String, String> attributes = new SocialInfo(userRequest, oAuth2User).getAttributes();
+
+        Member member = this.memberRepository.findByUsername(attributes.get("providerId"))
+                .orElse(null);
+
+        if (member == null) {
+
+            member = new Member();
+
+            member.setUsername(attributes.get("providerId"));
+            member.setPassword("");
+            member.setNickname(attributes.get("name"));
+            member.setEmail(attributes.get("email"));
+
+            this.memberRepository.save(member);
+        }
+
+        return new CustomDetails(member);
     }
 }

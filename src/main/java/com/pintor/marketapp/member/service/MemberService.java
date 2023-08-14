@@ -1,5 +1,6 @@
 package com.pintor.marketapp.member.service;
 
+import com.pintor.marketapp.DataNotFoundException;
 import com.pintor.marketapp.member.entity.Member;
 import com.pintor.marketapp.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,5 +29,11 @@ public class MemberService {
         this.memberRepository.save(member);
 
         return member;
+    }
+
+    public Member getMemberByUsername(String username) {
+
+        return this.memberRepository.findByUsername(username)
+                .orElseThrow(() -> new DataNotFoundException("member not found"));
     }
 }

@@ -1,6 +1,7 @@
 package com.pintor.marketapp.product.entity;
 
 import com.pintor.marketapp.base.entity.BaseEntity;
+import com.pintor.marketapp.cart.entity.Cart;
 import com.pintor.marketapp.market.entity.Market;
 import com.pintor.marketapp.question.entity.Question;
 import jakarta.persistence.CascadeType;
@@ -32,4 +33,7 @@ public class Product extends BaseEntity {
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private List<Question> questionList;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
+    private List<Cart> cartList;
 }
